@@ -365,10 +365,13 @@ let
         ${lib.optionalString (doDoc && copyDocsToSeparateOutput) ''
         export SOURCE_DATE_EPOCH=1
 
-        cp -r target/doc $doc
-        if [[ -n "$CARGO_BUILD_TARGET" && -d "target/$CARGO_BUILD_TARGET/doc" ]]; then
-          cp -r target/$CARGO_BUILD_TARGET/doc/. $doc/
-        fi
+        echo "Install doc"
+        mkdir -p $out/doc
+        cp -r target/doc $out/doc
+        # if [[ -n "$CARGO_BUILD_TARGET" && -d "target/$CARGO_BUILD_TARGET/doc" ]]; then
+        #   cp -r target/$CARGO_BUILD_TARGET/doc/. $doc/
+        # fi
+        # ls $doc
       ''}
 
         runHook postInstall
